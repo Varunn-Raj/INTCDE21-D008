@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
 using System;
-using Handson4;
+using Handson3;
+using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
 namespace UnitTestProject1
@@ -24,37 +24,30 @@ namespace UnitTestProject1
         }
 
         [TestCase]
-        public void LoginTestcase1()
+        public void Testcase1()
         {
-            string exp = "Invalid user id/password";
-            string act = program.ValidateUser("user_22", "secret@user12s");
-            Assert.That(act, Is.EqualTo(exp));
+            string x = program.ParseHostName("https://Facebook.com");
+            string y = "Facebook.com";
+            Assert.That(x, Is.EqualTo(y));
         }
         [TestCase]
-        public void LoginTestcase2()
+        public void Testcase2()
         {
-            string act = program.ValidateUser("user_113", "secret@user11");
-            string exp = string.Format("Invalid user id/password");
-            Assert.That(act, Is.EqualTo(exp));
 
+            string x = program.ParseHostName("http://twitter.com");
+            string y = "twitter.com";
+            Assert.That(x, Is.EqualTo(y));
         }
         [TestCase]
-        public void LoginTestcase3()
+        public void Testcase3()
         {
-
-            string act = program.ValidateUser("user_22", "secret@user22");
-            string exp = string.Format("Welcome user_22!!!");
-            Assert.That(act, Is.EqualTo(exp));
-
+            var ex = Assert.Throws<FormatException>(() => program.ParseHostName("https12://gmail.com"));
+            Assert.That(ex.Message, Is.EqualTo("Url is not in correct format"));
         }
-        [TestCase]
-        public void LoginTestcase4()
+        public void Testcase4()
         {
-            string exp = "Invalid user id/password";
-            string act = program.ValidateUser("user_23", "secret@user12s");
-            Assert.That(act, Is.EqualTo(exp));
+            var ex = Assert.Throws<FormatException>(() => program.ParseHostName("https12://gmail.com"));
+            Assert.That(ex.Message, Is.EqualTo("Url is not in correct format"));
         }
-
-
     }
 }
