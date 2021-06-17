@@ -34,7 +34,7 @@ namespace UnitTestProject2
         public void Testcase2()
         {
 
-            string x = program.ParseHostName("http://instagram.com");
+            string x = program.ParseHostName("http://twitter.com");
             string y = "twitter.com";
             Assert.That(x, Is.EqualTo(y));
         }
